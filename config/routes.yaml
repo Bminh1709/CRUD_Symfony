@@ -1,3 +1,16 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+# check_credentials:
+#     path: /check-credentials
+#     controller: App\Controller\AccessController::checkCredentials
+
+# config/routes.yaml
+# app_admin:
+#     path: /admin/{id}
+#     controller: App\Controller\AdminController::index
+# config/routes.yaml
+home:
+    path: /
+    controller: App\Controller\HomeController::index

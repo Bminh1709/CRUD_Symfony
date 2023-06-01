@@ -1,0 +1,23 @@
+{% if admin is not null %}
+     <h3 class="profile-username text-center">{{ admin.lastName }} {{ admin.firstName }}</h3>
+
+            <p class="text-muted text-center">{{ admin.gmail }}</p>
+
+            <ul class="list-group list-group-unbordered mb-3">
+                <li class="list-group-item">
+                    <b>Id Admin</b> <a class="float-right">{{ admin.id }}</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Gender</b> <a class="float-right">{{ admin.gender|capitalize }}</a>
+                </li>
+                <li class="list-group-item">
+                    <b>Phone</b> <a class="float-right">{{ admin.phone }}</a>
+                </li>
+            </ul>
+
+            </div>
+            <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+{% endif %}
+            

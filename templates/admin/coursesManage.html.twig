@@ -1,0 +1,79 @@
+<div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Courses Table</h3>
+
+                <!-- <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table table-bordered">
+                <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Teacher</th>
+                      <th style="width:100px;">Start Day</th>
+                      <th style="width:100px;">End Day</th>
+                      <th style="width:200px;">Description</th>
+                      <th>Price</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  
+
+
+                {% for course in courses %}
+
+
+                    <tr>
+                      <td>{{ course.id }}</td>
+                      <td>{{ course.name }}</td>
+
+                      
+                      <td>{{ course.teacher.vietnamname }}</td>
+                           
+
+
+
+                      <td>{{ course.startday|date('d-m-Y') }}</td>
+                      <td>{{ course.endday|date('d-m-Y') }}</td>
+                      <td>{{ course.des }}</td>
+                      <td>{{ course.price }}</td>
+                      <td style="display:flex; justify-content:center; border:none;">
+                          <a href="{{ path('admin_edit', {'id': course.id}) }}">
+                          <i style="margin-top:4px; color:#345971;" class="fas fa-edit"></i></a>
+                      </td>
+                      <td>
+                          <a href="{{ path('admin_delete', {'id': course.id}) }}"  onclick="return deleteConfirm();">
+                          <i style="margin-left:17px; color:#d63031;" class="fas fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+
+                {% endfor %}
+
+
+                  </tbody>
+
+                </table>
+                  </div>
+                <!-- /.card-body -->
+              </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css') }}">
+
+        <link rel="stylesheet" href="{{ asset('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css') }}">
+
+        <!-- css files -->
+        <link rel="stylesheet" href="{{ asset('css/ad_login.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/publicCSS.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/navigationbar.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/courses.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/popUp.css') }}">
+
+</head>
+<body>
+     <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Admin</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ path('admin_logout') }}">Log Out</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+            <div class="card-body box-profile">
+
+
+
+{% include 'admin/profileAdmin.html.twig' with {admin} %}
+
+
+</div>
+    <!-- /.col -->
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header p-2">
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link" href="{{ path('app_admin') }}" data-toggle="tab">Courses</a></li>
+            <li class="nav-item"><a class="nav-link active" href="{{ path('admin_create') }}" data-toggle="tab">Add Courses</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('app_teacher') }}" data-toggle="tab">Teacher</a></li>
+          </ul>
+        </div><!-- /.card-header -->
+        
+        <div class="card-body">
+        <div class="tab-content">
+
+
+
+        <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Add a new course</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+
+              <div class="card-body">
+              {{ form_start(form) }}
+              <div class="form-group">
+                    <label for="name">Name</label>
+                    {{ form_widget(form.name,{
+                        'attr':{
+                            'class':'form-control',
+                            'placeholder': 'Enter course name'
+                        }
+                    }) }}
+              </div>
+              <div class="form-group">
+                  {{ form_label(form.teacher, 'Teacher') }}
+                  {{ form_widget(form.teacher, {
+                      'attr': {
+                          'class': 'form-control',
+                          'placeholder': 'Enter teacher name'
+                      }
+                  }) }}
+                  {{ form_errors(form.teacher) }}
+              </div>
+              <div class="form-group">
+                    <label for="startday">StartDay:</label>
+                    {{ form_widget(form.startday,{
+                        'attr':{
+                            'class':'form-control'
+                        }
+                    }) }}
+              </div>
+              <div class="form-group">
+                    <label for="endday">Endday:</label>
+                    {{ form_widget(form.endday,{
+                        'attr':{
+                            'class':'form-control'
+                        }
+                    }) }}
+              </div>
+              <div class="form-group">
+                    <label for="des">Description:</label>
+                    {{ form_widget(form.des,{
+                        'attr':{
+                            'class':'form-control',
+                            'placeholder': 'Type description'
+                        }
+                    }) }}
+              </div>
+              <div class="form-group">
+                    <label for="price">Price:</label>
+                    {{ form_widget(form.price,{
+                        'attr':{
+                            'class':'form-control',
+                            'placeholder': 'Enter price'
+                        }
+                    }) }}
+              </div>
+
+
+                  <input type="submit" name="create_admin" class="btn btn-primary" value="Add"/>
+        
+
+
+               {{ form_end(form) }}
+            </div>
+            <!-- /.card -->
+
+               
+
+
+
+
+
+            </div>
+            <!-- /.card -->
+
+
+</body>
+
+
+</html>
