@@ -12,6 +12,7 @@ use App\Entity\Course;
 use App\Form\CourseType;
 use App\Repository\CoursesRepository;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 class AccessController extends AbstractController

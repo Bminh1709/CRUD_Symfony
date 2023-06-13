@@ -14,3 +14,10 @@
 home:
     path: /
     controller: App\Controller\HomeController::index
+
+# config/routes.yaml
+
+courses_list:
+    path: '/courses/list'
+    controller: App\Controller\HomeController::list
+    methods: ['GET']

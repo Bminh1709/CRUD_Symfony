@@ -1,0 +1,35 @@
+{# templates/homepage.html.twig #}
+
+<h1>Course List</h1>
+
+<div id="course-list">
+    <!-- Course list will be populated dynamically -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '{{ path('courses_list') }}',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var courseList = $('#course-list');
+                courseList.empty();
+
+                response.forEach(function(course) {
+                    var courseItem = $('<div>').addClass('course-item');
+                    courseItem.html('<h3>' + course.name + '</h3>' +
+                                    '<p>ID: ' + course.id + '</p>' +
+                                    '<p>Price: ' + course.price + '</p>');
+
+                    courseList.append(courseItem);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
+
