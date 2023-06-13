@@ -90,18 +90,18 @@ class AdminController extends AbstractController
         // Get the login state from the session
         $isLogin = $this->session->get('isLogin');
 
-        $adminData = $this->session->get('adminData');
-        // get Id from adminData session
-        $adminId = $adminData['id'];
-
-        // Get admin and function to check auth
-        $em = $this->getDoctrine()->getManager();
-        $adminFound = $em->getRepository('App\Entity\Admin')->find($adminId);
-        $functionFound = $em->getRepository('App\Entity\Functions')->find(1);
-
         // Check login of admin
         if ($isLogin === true)
         {
+            $adminData = $this->session->get('adminData');
+            // get Id from adminData session
+            $adminId = $adminData['id'];
+    
+            // Get admin and function to check auth
+            $em = $this->getDoctrine()->getManager();
+            $adminFound = $em->getRepository('App\Entity\Admin')->find($adminId);
+            $functionFound = $em->getRepository('App\Entity\Functions')->find(1);
+
             // check whether admin can access function or not
             if ($adminFound->getFunctions()->contains($functionFound)) {
                 //$em = $this->getDoctrine()->getManager();
@@ -153,38 +153,49 @@ class AdminController extends AbstractController
      */
     public function createAction(Request $request)
     {
-        $adminData = $this->session->get('adminData');
-        // get Id from adminData session
-        $adminId = $adminData['id'];
+        // Get the login state from the session
+        $isLogin = $this->session->get('isLogin');
 
-        // Get admin and function to check auth
-        $em = $this->getDoctrine()->getManager();
-        $adminFound = $em->getRepository('App\Entity\Admin')->find($adminId);
-        $functionFound = $em->getRepository('App\Entity\Functions')->find(2);
-
-        // check whether admin can access function or not
-        if ($adminFound->getFunctions()->contains($functionFound)) {
-            
-            $course = new Course();
-            $form = $this->createForm(CourseType::class, $course);
-            //$adminData = $this->session->get('adminData');
-            
-            if ($this->saveChanges($form, $request, $course)) {
-                
-                return $this->redirectToRoute('app_admin');
-            }
-            return $this->render('admin/create.html.twig', [
-                'form' => $form->createView(),
-                'admin' => $adminData,
-            ]);
-
-        }
-        else 
+        // Check login of admin
+        if ($isLogin === true)
         {
-            return $this->render('CantAccess.html.twig', [
-                'admin' => $adminData,
-                'accessCode' => 2
-            ]);
+            $adminData = $this->session->get('adminData');
+            // get Id from adminData session
+            $adminId = $adminData['id'];
+
+            // Get admin and function to check auth
+            $em = $this->getDoctrine()->getManager();
+            $adminFound = $em->getRepository('App\Entity\Admin')->find($adminId);
+            $functionFound = $em->getRepository('App\Entity\Functions')->find(2);
+
+            // check whether admin can access function or not
+            if ($adminFound->getFunctions()->contains($functionFound)) {
+                
+                $course = new Course();
+                $form = $this->createForm(CourseType::class, $course);
+                //$adminData = $this->session->get('adminData');
+                
+                if ($this->saveChanges($form, $request, $course)) {
+                    
+                    return $this->redirectToRoute('app_admin');
+                }
+                return $this->render('admin/create.html.twig', [
+                    'form' => $form->createView(),
+                    'admin' => $adminData,
+                ]);
+
+            }
+            else 
+            {
+                return $this->render('CantAccess.html.twig', [
+                    'admin' => $adminData,
+                    'accessCode' => 2
+                ]);
+            }
+        }
+        else
+        {
+            return $this->redirectToRoute('admin_login');
         }
     }
 
